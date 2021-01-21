@@ -1,9 +1,7 @@
 package com.yixuexi.crowd.mvc.handler;
 
-import cn.hutool.crypto.digest.DigestUtil;
-import cn.hutool.crypto.digest.MD5;
+
 import com.yixuexi.crowd.entity.Admin;
-import com.yixuexi.crowd.entity.ParamData;
 import com.yixuexi.crowd.service.api.AdminService;
 import com.yixuexi.crowd.util.CrowdUtil;
 import com.yixuexi.crowd.util.ResultEntity;
@@ -28,6 +26,9 @@ public class TestHandler {
     @Autowired
     private AdminService adminService;
 
+
+
+
     @RequestMapping("/test.html")
     public String test() {
         return "test";
@@ -50,15 +51,7 @@ public class TestHandler {
         return "Success";
     }
 
-    @ResponseBody
-    @RequestMapping("/send/array/two.json")
-    public String arrayTwo(ParamData paramData) {
-        List<Integer> list = paramData.getArray();
-        for (int i : list) {
-            System.out.println(i);
-        }
-        return "Success";
-    }
+
 
     @ResponseBody
     @RequestMapping("/send/array/three.json")

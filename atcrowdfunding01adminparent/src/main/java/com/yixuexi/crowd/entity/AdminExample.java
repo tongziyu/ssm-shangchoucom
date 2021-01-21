@@ -1,4 +1,4 @@
-package com.yixuexi.crowd;
+package com.yixuexi.crowd.entity;
 
 import java.util.ArrayList;
 import java.util.List;

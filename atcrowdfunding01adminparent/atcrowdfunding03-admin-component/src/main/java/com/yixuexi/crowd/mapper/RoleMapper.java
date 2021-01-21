@@ -2,8 +2,9 @@ package com.yixuexi.crowd.mapper;
 
 import com.yixuexi.crowd.entity.Role;
 import com.yixuexi.crowd.entity.RoleExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface RoleMapper {
     int countByExample(RoleExample example);
@@ -27,4 +28,18 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+
+    /**
+     * 根据关键字查询
+     * @param keyword 关键字
+     * @return 返回一个Role集合
+     */
+    List<Role> selectRoleByKeyword(String keyword);
+
+    List<Role> selectAssignRole(Integer adminId);
+
+    List<Role> selectUnAssignRole(Integer adminId);
+
+    List<Integer> selectAssignAuthByRoleId(Integer roleId);
+
 }

@@ -2,8 +2,9 @@ package com.yixuexi.crowd.mapper;
 
 import com.yixuexi.crowd.entity.Menu;
 import com.yixuexi.crowd.entity.MenuExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface MenuMapper {
     int countByExample(MenuExample example);

@@ -1,4 +1,4 @@
-package com.yixuexi.crowd.service.api;
+package com.yixuexi.crowd.mapper;
 
 import com.yixuexi.crowd.entity.Auth;
 import com.yixuexi.crowd.entity.AuthExample;
