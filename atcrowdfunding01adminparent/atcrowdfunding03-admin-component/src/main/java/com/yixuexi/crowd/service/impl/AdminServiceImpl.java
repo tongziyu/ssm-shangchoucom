@@ -13,6 +13,7 @@ import com.yixuexi.crowd.util.CrowdUtil;
 import com.yixuexi.crowd.util.constant.CrowdConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -29,6 +30,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private AdminMapper adminMapper;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
      * 有选择的更新用户
@@ -82,7 +86,7 @@ public class AdminServiceImpl implements AdminService {
         }
 
         // 密码加密
-        admin.setUserPswd(CrowdUtil.md5(admin.getUserPswd()));
+        admin.setUserPswd(bCryptPasswordEncoder.encode(admin.getUserPswd()));
         // 用户创建时间
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -183,5 +187,15 @@ public class AdminServiceImpl implements AdminService {
         }
     }
 
+    /**
+     * 根据loginAcct查询到admin对象
+     * @param loginAcct
+     * @return
+     */
+    @Override
+    public Admin getAdminByLoginAcct(String loginAcct) {
+        Admin admin = adminMapper.selectAdminByLoginAcct(loginAcct);
+        return admin;
+    }
 }
 

@@ -15,4 +15,11 @@ public interface AuthService {
      * @return
      */
     List<Auth> getAll();
+
+    /**
+     * 根据adminId 获取权限
+     * @param adminId
+     * @return
+     */
+    List<String> getAssignAuthByAdminId(Integer adminId);
 }

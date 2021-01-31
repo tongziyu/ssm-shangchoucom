@@ -141,7 +141,32 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+    <select id="selectAssignAuthByAdminId" resultType="java.lang.String">
+      SELECT
+          DISTINCT auth.`name`
+      FROM
+          t_auth auth
+      LEFT JOIN
+          inner_role_auth ira
+      ON
+          ira.auth_id = auth.`id`
+      LEFT JOIN
+          t_role r
+      ON
+          r.`id` = ira.role_id
+      WHERE
+          r.`id` IN(
+              SELECT
+                  role_id
+              FROM
+                  inner_admin_role
+              WHERE
+                  admin_id = #{adminId}
+              )
+          AND auth.`name` != '' AND auth.`name` IS NOT NULL
+
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
     update t_auth
     <set >
       <if test="record.id != null" >

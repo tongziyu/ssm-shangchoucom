@@ -44,18 +44,18 @@
         </property>
     </bean>
 
-    <!--注册拦截器-->
+    <!-- 注册拦截器 [使用spring security后就不使用这个了]
     <mvc:interceptors>
         <mvc:interceptor>
-            <!--要拦截的资源  /*对应的是一层路径， /**对应多层路径 -->
+            要拦截的资源  /*对应的是一层路径， /**对应多层路径
             <mvc:mapping path="/**"/>
-            <!--不拦截的资源-->
+            不拦截的资源
             <mvc:exclude-mapping path="/admin/do/login.html"/>
             <mvc:exclude-mapping path="/admin/to/login/page.html"/>
-            <!-- 注：退出登录也要写上，因为如果页面长时间不动session清除了，没法退出登录了-->
+             注：退出登录也要写上，因为如果页面长时间不动session清除了，没法退出登录了
             <mvc:exclude-mapping path="/admin/do/logout.html"/>
             <bean class="com.yixuexi.crowd.mvc.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors>  -->
 
 </beans>

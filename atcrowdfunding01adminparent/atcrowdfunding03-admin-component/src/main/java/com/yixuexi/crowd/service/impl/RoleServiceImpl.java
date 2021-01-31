@@ -2,16 +2,19 @@ package com.yixuexi.crowd.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
 import com.yixuexi.crowd.entity.Role;
 import com.yixuexi.crowd.entity.RoleExample;
 import com.yixuexi.crowd.exception.RoleIsExistsException;
 import com.yixuexi.crowd.mapper.RoleMapper;
 import com.yixuexi.crowd.service.api.RoleService;
 import com.yixuexi.crowd.util.constant.CrowdConstant;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @date: 2021/1/14   20:48
@@ -33,11 +36,7 @@ public class RoleServiceImpl implements RoleService {
         RoleExample.Criteria criteria = roleExample.createCriteria();
         criteria.andNameEqualTo(role.getName());
         List<Role> list = roleMapper.selectByExample(roleExample);
-
-
         return list;
-
-
     }
 
     /**
@@ -117,5 +116,20 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<Integer> getAssignAuthByRoleId(Integer roleId) {
         return roleMapper.selectAssignAuthByRoleId(roleId);
+    }
+
+    @Override
+    public void saveRoleAuthRelationship(Map<String, List<Integer>> map) {
+        //先将该roleId所有的关系删除
+        List<Integer> list = map.get("roleId");
+        Integer roleId = list.get(0);
+        roleMapper.deleteRoleAuthByRoleId(roleId);
+        // 拿到权限id集合
+        List<Integer> authIds = map.get("authIdArray");
+        // 判断，如果为0则 把新关系都新增进去
+        if (authIds != null && authIds.size() > 0) {
+            roleMapper.insertRoleAuthRelationship(authIds,roleId);
+        }
+
     }
 }

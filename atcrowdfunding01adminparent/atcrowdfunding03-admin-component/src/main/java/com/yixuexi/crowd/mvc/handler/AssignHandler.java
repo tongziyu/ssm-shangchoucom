@@ -9,12 +9,10 @@ import com.yixuexi.crowd.util.ResultEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @date: 2021/1/18   21:05
@@ -91,6 +89,17 @@ public class AssignHandler {
     public ResultEntity<List<Auth>> getAuthAllList(){
         List<Auth> all = authService.getAll();
         return ResultEntity.successWithData(all);
+    }
+    /**
+     * 保存角色和权限之间的关系
+     */
+    @RequestMapping("/assign/do/role/assign/auth.json")
+    @ResponseBody
+    public ResultEntity<String> saveRoleAssignAuth(
+            @RequestBody Map<String,List<Integer>> map
+            ){
+        roleService.saveRoleAuthRelationship(map);
+        return ResultEntity.successWithoutData();
     }
 
 }

@@ -5,6 +5,7 @@ import com.yixuexi.crowd.entity.Role;
 import com.yixuexi.crowd.service.api.RoleService;
 import com.yixuexi.crowd.util.ResultEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,7 @@ public class RoleHandler {
      * @param keyword 关键字
      * @return 返回一个ResultEntity里面封装了结果和数据
      */
+    @PreAuthorize("hasRole('部长')")
     @ResponseBody
     @RequestMapping(value = "/role/get/page/info.json",method = RequestMethod.POST)
     public ResultEntity<PageInfo<Role>> getPageInfo(

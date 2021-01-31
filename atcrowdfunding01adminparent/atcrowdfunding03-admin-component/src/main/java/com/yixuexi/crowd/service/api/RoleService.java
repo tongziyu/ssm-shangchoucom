@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.yixuexi.crowd.entity.Role;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @date: 2021/1/14   20:47
@@ -64,4 +65,11 @@ public interface RoleService {
      * @return
      */
     List<Integer> getAssignAuthByRoleId(Integer roleId);
+
+    /**
+     * 保存角色的权限
+     * @param map key:roleId --- > value:角色的id （只有一个）
+     *            key:authIdArray ---- > value:权限的id
+     */
+    void saveRoleAuthRelationship(Map<String,List<Integer>> map);
 }

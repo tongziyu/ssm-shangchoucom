@@ -125,6 +125,12 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+  <delete id="deleteRoleAuthByRoleId">
+    delete from
+        inner_role_auth
+    where
+        role_id = #{roleId}
+  </delete>
   <insert id="insert" parameterType="com.yixuexi.crowd.entity.Role" >
     insert into t_role (id, name)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
@@ -147,6 +153,14 @@
         #{name,jdbcType=VARCHAR},
       </if>
     </trim>
+  </insert>
+  <insert id="insertRoleAuthRelationship">
+    insert into
+        inner_role_auth(role_id,auth_id)
+    values
+        <foreach collection="authIds" item="authId" separator=",">
+          (#{roleId},#{authId})
+        </foreach>
   </insert>
   <select id="countByExample" parameterType="com.yixuexi.crowd.entity.RoleExample" resultType="java.lang.Integer" >
     select count(*) from t_role

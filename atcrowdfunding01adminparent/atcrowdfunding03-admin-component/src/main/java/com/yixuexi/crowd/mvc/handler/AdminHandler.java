@@ -6,9 +6,11 @@ import com.yixuexi.crowd.exception.DeleteOneSelfException;
 import com.yixuexi.crowd.service.api.AdminService;
 import com.yixuexi.crowd.util.constant.CrowdConstant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -91,6 +93,7 @@ public class AdminHandler {
      * @param adminId
      * @return
      */
+
     @RequestMapping("/admin/remove/{adminId}/{pageNum}/{keyword}.html")
     public String removeAdmin(@PathVariable("adminId") Integer adminId,
                               @PathVariable("pageNum") Integer pageNum,
@@ -122,7 +125,9 @@ public class AdminHandler {
      * 保存用户
      * @param admin 用户
      * @return 返回并且给一个最大页，让他去最后一页
+     * @PreAuthorize("hasAuthority('user:save')") : 表示访问这个路由必须要有 user:save权限
      */
+    @PreAuthorize("hasAuthority('user:save')")
     @RequestMapping("/admin/save.html")
     public String saveAdmin(Admin admin){
         adminService.saveAdmin(admin);

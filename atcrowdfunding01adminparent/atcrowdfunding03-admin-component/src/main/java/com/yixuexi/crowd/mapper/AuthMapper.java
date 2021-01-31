@@ -27,4 +27,11 @@ public interface AuthMapper {
     int updateByPrimaryKeySelective(Auth record);
 
     int updateByPrimaryKey(Auth record);
+
+    /**
+     * 根据 adminId 获取权限name集合
+     * @param adminId
+     * @return
+     */
+    List<String> selectAssignAuthByAdminId(Integer adminId);
 }

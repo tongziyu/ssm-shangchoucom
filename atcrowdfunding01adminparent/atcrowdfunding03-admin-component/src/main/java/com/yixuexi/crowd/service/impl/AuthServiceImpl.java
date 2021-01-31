@@ -25,4 +25,9 @@ public class AuthServiceImpl implements AuthService {
     public List<Auth> getAll() {
         return authMapper.selectByExample(null);
     }
+
+    @Override
+    public List<String> getAssignAuthByAdminId(Integer adminId) {
+        return authMapper.selectAssignAuthByAdminId(adminId);
+    }
 }

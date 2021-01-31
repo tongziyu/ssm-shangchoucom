@@ -186,6 +186,14 @@
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
+    <select id="selectAdminByLoginAcct" resultMap="BaseResultMap">
+        select
+            id, login_acct, user_pswd, user_name, email, create_time
+        from
+            t_admin
+        where
+            login_acct = #{loginAcct}
+    </select>
     <update id="updateByExampleSelective" parameterType="map">
         update t_admin
         <set>

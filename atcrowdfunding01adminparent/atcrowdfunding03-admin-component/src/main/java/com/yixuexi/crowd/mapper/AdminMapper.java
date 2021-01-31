@@ -48,4 +48,11 @@ public interface AdminMapper {
      * @param roleIdList
      */
     void insertNewRelationship(@Param("adminId") Integer adminId,@Param("roleIdList") List<Integer> roleIdList);
+
+    /**
+     * 根据用账号查询到Admin
+     * @param loginAcct
+     * @return
+     */
+    Admin selectAdminByLoginAcct(String loginAcct);
 }

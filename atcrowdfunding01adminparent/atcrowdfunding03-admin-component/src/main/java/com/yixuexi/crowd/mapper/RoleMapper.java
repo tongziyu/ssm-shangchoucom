@@ -36,10 +36,28 @@ public interface RoleMapper {
      */
     List<Role> selectRoleByKeyword(String keyword);
 
+    /**
+     * 根据adminId 获取已经得到的角色
+     * @param adminId
+     * @return
+     */
     List<Role> selectAssignRole(Integer adminId);
 
     List<Role> selectUnAssignRole(Integer adminId);
 
     List<Integer> selectAssignAuthByRoleId(Integer roleId);
+
+    /**
+     * 删除 roleId 对应的所有关系
+     * @param roleId
+     */
+    void deleteRoleAuthByRoleId(Integer roleId);
+
+    /**
+     * 保存roleId的权限
+     * @param authIds
+     * @param roleId
+     */
+    void insertRoleAuthRelationship(@Param("authIds") List<Integer> authIds,@Param("roleId") Integer roleId);
 
 }
